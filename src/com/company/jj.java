@@ -1,13 +1,23 @@
 package com.company;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Scanner;
 
 class adressBook {
-    private List adress;
-    public ArrayList adress1 = new ArrayList<>();
-public int room = 0;
-public int house;
-public String street;
-public String name;
+    ArrayList vse = new ArrayList();
+    static String adds(){
+        Scanner in = new Scanner(System.in);
+        System.out.print("Введите номер квартиры: ");
+        String h = in.next();
+        System.out.print("Введите номер улицы: ");
+        String s = in.next();
+        System.out.print("Введите улицу: ");
+        String n = in.next();
+        return n + " " + s + ", кв. " + h;
+    }
+    static String name() {
+        System.out.print("Введите фамилию: ");
+        Scanner in = new Scanner(System.in);
+        return in.next();
+    }
 }
