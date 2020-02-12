@@ -1,18 +1,18 @@
 package com.company;
 
-import java.util.ArrayList;
+import javafx.util.Pair;
+
+import java.util.HashMap;
 
 public class Main {
 
     public static void main(String[] args) {
         adressBook adresses = new adressBook();
-        ArrayList vse2 = adresses.vse;
-        vse2.add(adressBook.name());
-        vse2.add(adressBook.adds());
-        System.out.print(vse2.get(0));
-        System.out.print(" - ");
-        System.out.print(vse2.get(1));
-        System.out.print(vse2.get(0).toString().contains("Кова"));
-
+        adresses.adds("Ковалевский", new Pair<>("Воронина 20","22"));
+        adresses.adds("Пушкарев", new Pair<>("Ленина 16","65"));
+        adresses.delete("Ковалевский");
+        adresses.changeAdress("Пушкарев", new Pair<>("Ленина 26","13"));
+        System.out.println(adresses.vse);
+        System.out.println(adresses.getAdress("Пушкарев"));
     }
 }
