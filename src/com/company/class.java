@@ -7,31 +7,30 @@ import java.util.Map;
 class adressBook {
     HashMap<String, Triplet> vse = new HashMap<>();
 
-    void adds(String family, Triplet STnums) {
+    public void adds(String family, Triplet STnums) {
         if (!vse.containsKey(family))
             vse.put(family, STnums);
     }
 
-    void delete(String name) {
+    public void delete(String name) {
         if (vse.containsKey(name)) {
             vse.remove(name);
         } else throw new NullPointerException("Людей, с такой фамилией, в списках нет");
     }
 
-    void changeAdress(String name, Triplet STnums) {
+    public void changeAdress(String name, Triplet STnums) {
         if (vse.containsKey(name)) {
-            vse.remove(name);
             vse.put(name, STnums);
         } else throw new NullPointerException("Людей, с такой фамилией, в списках нет");
     }
 
-    String getAdress(String name) {
+    public String getAdress(String name) {
         if (vse.containsKey(name)) {
             return vse.get(name).getStreet() + " " + vse.get(name).getStreetNum() + " " + vse.get(name).getRoom();
         } else return "Людей, с такой фамилией, в списках нет";
     }
 
-    ArrayList<String> whoLifeStreet(String streetIn) {
+    public ArrayList<String> whoLifeStreet(String streetIn) {
         ArrayList<String> names = new ArrayList<>();
         for (Map.Entry<String, Triplet> entry : vse.entrySet()) {
             String name = entry.getKey();
@@ -44,7 +43,7 @@ class adressBook {
         return names;
     }
 
-    ArrayList<String> whoLifeRoom(int roomIn) {
+    public ArrayList<String> whoLifeRoom(int roomIn) {
         ArrayList<String> names = new ArrayList<>();
         for (Map.Entry<String, Triplet> entry : vse.entrySet()) {
             String name = entry.getKey();
@@ -69,15 +68,15 @@ class Triplet {
         this.room = room;
     }
 
-    String getStreet() {
+    public String getStreet() {
         return street;
     }
 
-    int getStreetNum() {
+    public int getStreetNum() {
         return house;
     }
 
-    int getRoom() {
+    public int getRoom() {
         return room;
     }
 

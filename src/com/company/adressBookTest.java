@@ -9,7 +9,7 @@ import java.util.HashMap;
 
 class adressBookTest {
     private adressBook actual = new adressBook();
-    public HashMap<String, Triplet> expected = new HashMap<>();
+    private HashMap<String, Triplet> expected = new HashMap<>();
 
     @org.junit.jupiter.api.Test
     void adds() {
@@ -76,7 +76,7 @@ class adressBookTest {
     }
 
     @org.junit.jupiter.api.Test
-    void whoLifeFlat() {
+    void whoLifeRoom() {
         ArrayList<String> expectedL1 = new ArrayList<>();
         expectedL1.add("Соболев");
         expectedL1.add("Соболева");
