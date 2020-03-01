@@ -1,23 +1,23 @@
 package com.company;
 
 import org.junit.Assert;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-class adressBookTest {
-    private adressBook actual = new adressBook();
+class AddressBookTest {
+    private AddressBook actual = new AddressBook();
     private HashMap<String, Triplet> expected = new HashMap<>();
 
     @org.junit.jupiter.api.Test
     void adds() {
         expected.put("Петров", new Triplet("Ленина", 15, 45));
         actual.adds("Петров", new Triplet("Ленина", 15, 45));
-        Assert.assertEquals(expected, actual.vse);
+        Assert.assertEquals(expected, actual.person);
+        Assert.assertFalse(actual.adds("Петров", new Triplet("Ленина", 15, 45)));
         expected.remove("Петров");
-        Assert.assertNotEquals(expected, actual.vse);
+        Assert.assertNotEquals(expected, actual.person);
     }
 
     @Test
@@ -26,11 +26,11 @@ class adressBookTest {
         actual.adds("Петров", new Triplet("Ленина", 15, 45));
         actual.adds("Васильев", new Triplet("Пушкина", 14, 55));
         actual.delete("Петров");
-        Assert.assertNotEquals(expected, actual.vse);
+        Assert.assertNotEquals(expected, actual.person);
         actual.delete("Васильев");
         actual.adds("Петров", new Triplet("Ленина", 15, 45));
-        Assert.assertEquals(expected, actual.vse);
-        Assertions.assertThrows(NullPointerException.class, () -> actual.delete("Иванов"));
+        Assert.assertEquals(expected, actual.person);
+        Assert.assertFalse(actual.delete("Иванов"));
     }
 
     @org.junit.jupiter.api.Test
@@ -39,12 +39,11 @@ class adressBookTest {
         expected.put("Соболева", new Triplet("Мерецкова", 3, 6));
         actual.adds("Соболев", new Triplet("Пашкова", 1, 2));
         actual.adds("Соболева", new Triplet("Пашкова", 1, 2));
-        Assert.assertNotEquals(expected, actual.vse);
+        Assert.assertNotEquals(expected, actual.person);
         actual.changeAdress("Соболев", new Triplet("Мерецкова", 3, 6));
         actual.changeAdress("Соболева", new Triplet("Мерецкова", 3, 6));
-        Assert.assertEquals(expected, actual.vse);
-        Assertions.assertThrows(NullPointerException.class, () ->
-                actual.changeAdress("Петров", new Triplet("Мерецкова", 3, 6)));
+        Assert.assertEquals(expected, actual.person);
+        Assert.assertFalse(actual.changeAdress("Иванов", new Triplet("Мерецкова", 3, 6)));
     }
 
     @org.junit.jupiter.api.Test
@@ -52,10 +51,13 @@ class adressBookTest {
         actual.adds("Соболев", new Triplet("Пашкова", 1, 2));
         actual.adds("Соболева", new Triplet("Пашкова", 1, 2));
         actual.adds("Петров", new Triplet("Ленина", 15, 45));
-        Assert.assertEquals("Пашкова 1 2", actual.getAdress("Соболев"));
-        Assert.assertEquals("Пашкова 1 2", actual.getAdress("Соболева"));
-        Assert.assertEquals("Ленина 15 45", actual.getAdress("Петров"));
-        Assert.assertEquals("Людей, с такой фамилией, в списках нет", actual.getAdress("Андреев"));
+        expected.put("Соболев", new Triplet("Пашкова", 1, 2));
+        expected.put("Соболева", new Triplet("Пашкова", 1, 2));
+        expected.put("Петров", new Triplet("Ленина", 15, 45));
+        Assert.assertEquals(expected.get("Соболев"), actual.getAdress("Соболев"));
+        Assert.assertEquals(expected.get("Соболева"), actual.getAdress("Соболева"));
+        Assert.assertEquals(expected.get("Петров"), actual.getAdress("Петров"));
+        Assert.assertNull(actual.getAdress("Иванов"));
     }
 
     @org.junit.jupiter.api.Test
@@ -66,7 +68,6 @@ class adressBookTest {
         ArrayList<String> expectedL2 = new ArrayList<>();
         expectedL2.add("Петров");
         ArrayList<String> exception = new ArrayList<>();
-        exception.add("Людей, живущих на этой улице, нет");
         actual.adds("Соболев", new Triplet("Пашкова", 1, 2));
         actual.adds("Соболева", new Triplet("Пашкова", 1, 2));
         actual.adds("Петров", new Triplet("Ленина", 15, 45));
@@ -83,7 +84,6 @@ class adressBookTest {
         ArrayList<String> expectedL2 = new ArrayList<>();
         expectedL2.add("Петров");
         ArrayList<String> exception = new ArrayList<>();
-        exception.add("Людей, живущих на этой улице, нет");
         actual.adds("Соболев", new Triplet("Пашкова", 1, 2));
         actual.adds("Соболева", new Triplet("Пашкова", 1, 2));
         actual.adds("Петров", new Triplet("Ленина", 15, 45));
