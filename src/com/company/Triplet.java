@@ -30,6 +30,7 @@ class Triplet {
         Triplet my = (Triplet) o;
         return street.equals(my.street) && room == my.room && house == my.house;
     }
+
     @Override
     public final int hashCode() {
         int result = street.hashCode();

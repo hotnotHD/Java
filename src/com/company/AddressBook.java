@@ -1,14 +1,15 @@
 package com.company;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-class AddressBook {
+public class AddressBook {
     HashMap<String, Triplet> person = new HashMap<>();
-
-    public boolean adds(String family, Triplet STnums) {
+/* При попытке использования методов add, delete или changeAddress с null, выводится false,
+* методы не логического типа кидают исключения, кроме поиска по дому, т.к int не даст записать в себя null*/
+    public boolean add(String family, Triplet STnums) {
+        if (family == null || STnums.getStreet() == null) {
+            return false;
+        }
         if (!person.containsKey(family)) {
             person.put(family, STnums);
             return true;
@@ -23,18 +24,23 @@ class AddressBook {
         } else return false;
     }
 
-    public boolean changeAdress(String name, Triplet STnums) {
+    public boolean changeAddress(String name, Triplet STnums) {
         if (person.containsKey(name)) {
             person.put(name, STnums);
             return true;
         } else return false;
     }
 
-    public Triplet getAdress(String name) {
-            return person.get(name);
+    public Triplet getAddress(String name) {
+        if (name == null) {
+            throw new NullPointerException();
+        }return person.get(name);
     }
 
     public List<String> whoLifeStreet(String streetIn) {
+        if (streetIn == null) {
+            throw new NullPointerException();
+        }
         ArrayList<String> names = new ArrayList<>();
         for (Map.Entry<String, Triplet> entry : person.entrySet()) {
             String name = entry.getKey();
@@ -46,15 +52,18 @@ class AddressBook {
         return names;
     }
 
-    public List<String> whoLifeRoom(int roomIn) {
+    public List<String> whoLifeHouse(int houseIn) {
         ArrayList<String> names = new ArrayList<>();
         for (Map.Entry<String, Triplet> entry : person.entrySet()) {
             String name = entry.getKey();
             Triplet value = entry.getValue();
-            if (value.getRoom() == (roomIn)) {
+            if (value.getRoom() == (houseIn)) {
                 names.add(name);
             }
         }
         return names;
     }
+
+
+
 }
