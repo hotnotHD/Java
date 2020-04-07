@@ -1,11 +1,11 @@
 package com.company;
 
-class Triplet {
+class Address {
     private String street;
     private int house;
     private int room;
 
-    Triplet(String street, int streetNum, int room) {
+    Address(String street, int streetNum, int room) {
         this.street = street;
         this.house = streetNum;
         this.room = room;
@@ -27,7 +27,7 @@ class Triplet {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (getClass() != o.getClass()) return false;
-        Triplet my = (Triplet) o;
+        Address my = (Address) o;
         return street.equals(my.street) && room == my.room && house == my.house;
     }
 
